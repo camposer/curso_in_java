@@ -1,7 +1,24 @@
 public class Contrato {
-	private int numero;
-	private String nombreCto;
+	private int numero = 99;
+	private String nombreCto = "N/D";
 	private int duracion; // en días
+	
+	public Contrato() {
+		this(0);
+		numero = 90;
+	}
+	
+	public Contrato(int duracion) {
+		this(99, "N/D", duracion); // Llamada al constructor de abajo
+	}
+	
+	public Contrato(int numero, String nombreCto, 
+			int duracion) {
+		this.numero = numero;
+		this.nombreCto = nombreCto;
+		this.duracion = duracion;
+	}
+	
 	
 	public int getNumero() {
 		return numero;
