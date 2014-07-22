@@ -43,4 +43,5 @@ public class Persona {
 		System.out.println("Edad: " + edad);
 		System.out.println();
 	}
+	
 }
