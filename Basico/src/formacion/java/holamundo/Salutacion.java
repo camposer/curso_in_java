@@ -1,3 +1,4 @@
+package formacion.java.holamundo;
 public class Salutacion {
 	public void saludo() {
 		System.out.println("Hola!");	

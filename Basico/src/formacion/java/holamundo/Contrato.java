@@ -1,3 +1,4 @@
+package formacion.java.holamundo;
 public class Contrato {
 	private int numero = 99;
 	private String nombreCto = "N/D";

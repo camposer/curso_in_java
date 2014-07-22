@@ -1,3 +1,6 @@
+package formacion.java.test;
+
+import formacion.java.holamundo.Contrato;
 
 public class TestContrato {
 	public static void main(String[] args) {
