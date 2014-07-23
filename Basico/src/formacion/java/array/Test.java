@@ -34,9 +34,9 @@ public class Test {
 			
 			for (int j = 0; j < multi[i].length; j++) {
 				multi[i][j] = valor; 
+				valor++;
 			}
 			
-			valor++;
 		}
 		imprimir(multi);
 		
