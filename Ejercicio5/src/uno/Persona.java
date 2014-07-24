@@ -1,3 +1,4 @@
+package uno;
 public class Persona extends SerVivo {
 	private String nombre;
 	private String apellido = "García";

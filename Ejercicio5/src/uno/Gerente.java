@@ -1,3 +1,4 @@
+package uno;
 import java.util.Date;
 
 public class Gerente extends Empleado {
