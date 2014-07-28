@@ -1,3 +1,5 @@
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -26,6 +28,12 @@ public class TestEmpleados {
 		empleados.add(new Empleado()); // 4
 		
 //		System.out.println(empleados.get(99).nombre); // NullPointerException 
+		
+		Collections.sort(empleados); // Ordena utilizando como criterio el método compareTo dentro de Empleado
+		Collections.sort(empleados, 
+				new EmpleadosPorSalarioComparator(
+							EmpleadosPorSalarioComparator.ASC
+						));
 		
 		Iterator<Empleado> i = empleados.iterator();
 		while(i.hasNext()) {
