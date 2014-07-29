@@ -2,12 +2,11 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
+
 public class Serializador {
-	public static final String NOMBRE_ARCHIVO = "archivos/Personas.byte";
+	public static final String NOMBRE_ARCHIVO = "archivos/Persona.byte";
 	
 	private Scanner scanner;
 	
@@ -20,33 +19,21 @@ public class Serializador {
 	}
 	
 	public void iniciar() throws Exception {
-		List<Persona> personas =
-				new ArrayList<Persona>();
-		boolean sigo = true;
-		while (sigo) {
-			System.out.println();
-			System.out.println("Nombre?");
-			String nombre = scanner.nextLine();
-			System.out.println("Apellido?");
-			String apellido = scanner.nextLine();
-			System.out.println("Edad?");
-			String sedad = scanner.nextLine();
-			int edad = Integer.parseInt(sedad);
-			
-			personas.add(new Persona(nombre, apellido, edad));
-			
-			System.out.println("Desea continuar (S/N)?");
-			String opcion = scanner.nextLine();
-			if (opcion.equalsIgnoreCase("N"))
-				sigo = false;
-		}
+		System.out.println("Nombre?");
+		String nombre = scanner.nextLine();
+		System.out.println("Apellido?");
+		String apellido = scanner.nextLine();
+		System.out.println("Edad?");
+		String sedad = scanner.nextLine();
+		int edad = Integer.parseInt(sedad);
 		
 		// Construyendo y serializando el objeto (Persona)
-		serializar(personas, NOMBRE_ARCHIVO);
-		System.out.println("Objeto serializado... " + personas);
+		Persona p = new Persona(nombre, apellido, edad);
+		serializar(p, NOMBRE_ARCHIVO);
+		System.out.println("Objeto serializado... " + p);
 		
-		personas = (List<Persona>)deserializar(NOMBRE_ARCHIVO);
-		System.out.println("Objeto deserializado... " + personas);
+		p = (Persona)deserializar(NOMBRE_ARCHIVO);
+		System.out.println("Objeto deserializado... " + p);
 	}
 	
 	public void serializar(Object obj, String archivo) throws Exception {
