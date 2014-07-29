@@ -1,4 +1,4 @@
-package formacion.java.flujos;
+package formacion.java.entradasalida;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -14,7 +14,7 @@ public class TestStreams {
 		//leerFicherSoloLineas();
 		//leerConsola1(); // Este método no es recomendable!
 		//leerConsola2();
-		//leerConsola3();
+		//leerConsola3(); // RECOMENDADA!
 	}
 
 	private static void leerConsola3() throws Exception {
@@ -39,23 +39,23 @@ public class TestStreams {
 		System.out.println(linea);
 	}
 
-	private static void leerFicherSoloLineas() throws Exception {
+	private static void leerFicherSoloBytes() throws Exception {
 		// 1. Abrir fichero
 		FileInputStream fis = 
 				new FileInputStream("archivos/hola.txt");
 		
 		// Recorriendo el fichero hasta el final (byte a byte)
-		int b = fis.read();
+		int b = fis.read(); // Dame el primer byte
 		while (b != -1) {
 			System.out.print((char)b);
-			b = fis.read();
+			b = fis.read(); // Dame el siguiente byte
 		}
 
 		// Cerrando el fichero
 		fis.close();
 	}
 
-	private static void leerFicherSoloBytes() throws Exception {
+	private static void leerFicherSoloLineas() throws Exception {
 		// 1. Abrir fichero
 		FileInputStream fis = 
 				new FileInputStream("archivos/hola.txt");

@@ -1,4 +1,4 @@
-package formacion.java.flujos;
+package formacion.java.entradasalida;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

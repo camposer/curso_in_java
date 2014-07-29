@@ -1,4 +1,4 @@
-package formacion.java.flujos;
+package formacion.java.entradasalida;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
