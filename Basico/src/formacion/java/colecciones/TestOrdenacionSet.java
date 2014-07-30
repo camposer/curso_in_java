@@ -2,7 +2,6 @@ package formacion.java.colecciones;
 
 import java.util.Set;
 import java.util.TreeSet;
-
 public class TestOrdenacionSet {
 	public static void main(String[] args) {
 		Set<Estudiante> estudiantes = new TreeSet<Estudiante>();
