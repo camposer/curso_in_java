@@ -32,22 +32,80 @@ public class PersonaGui {
 				agregarPersona();
 			else if (opcion.equals("2"))
 				obtenerPersonas();
-/*			
 			else if (opcion.equals("3"))
 				obtenerPersona();
 			else if (opcion.equals("4"))
 				modificarPersona();
 			else if (opcion.equals("5"))
 				eliminarPersona();
-*/
 			else if (opcion.equals("6"))
 				break;
 		}
 	}
 
+	private void eliminarPersona() {
+		System.out.print("Id? ");
+		String sid = scanner.nextLine();
+		Integer id = Integer.parseInt(sid);
+		
+		new PersonaService().eliminarPersona(id);
+	}
+
+	private void modificarPersona() {
+		System.out.print("Id? ");
+		String sid = scanner.nextLine();
+		Integer id = Integer.parseInt(sid);
+		
+		Persona p = new PersonaService().obtenerPersona(id);
+
+		if (p == null) { // Si no existe la persona sale del método
+			System.out.println("No existe la persona para el id = " + id);
+			return;
+		}
+
+		System.out.println(p); // Imprimo datos de la persona actual
+
+		System.out.print("Nombre? ");
+		String nombre = scanner.nextLine();
+		p.setNombre(nombre);
+		
+		System.out.print("Apellido? ");
+		String apellido = scanner.nextLine();
+		p.setApellido(apellido);
+		
+		System.out.print("Altura? ");
+		String saltura = scanner.nextLine();
+		Float altura = Float.parseFloat(saltura);
+		p.setAltura(altura);
+		
+		System.out.print("Fnac? ");
+		String sfnac = scanner.nextLine();
+		Date fnac;
+		try {
+			fnac = new SimpleDateFormat("yyyy-MM-dd").parse(sfnac);
+			p.setFechaNacimiento(fnac);
+		} catch (ParseException e) {
+			System.out.println("Fecha inválida");
+			e.printStackTrace();
+			return;
+		}
+		
+		new PersonaService().modificarPersona(p);
+
+	}
+
+	private void obtenerPersona() {
+		System.out.print("Id? ");
+		String sid = scanner.nextLine();
+		Integer id = Integer.parseInt(sid);
+		
+		Persona p = new PersonaService().obtenerPersona(id);
+		System.out.println(p);
+	}
+
 	private void obtenerPersonas() {
 		List<Persona> personas = new PersonaService().obtenerPersonas();
-		for (Persona p : personas) 
+		if (personas != null) for (Persona p : personas) 
 			System.out.println(p);
 	}
 

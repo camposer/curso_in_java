@@ -24,5 +24,31 @@ public class PersonaService {
 			throw new AppServiceException(e);
 		}
 	}
+
+	public Persona obtenerPersona(Integer id) {
+		try {
+			return new PersonaDao().obtener(id);
+		} catch (AppDaoException e) {
+			throw new AppServiceException(e);
+		}
+	}
+
+	public void modificarPersona(Persona p) {
+		// TODO Validar si la persona existe en BD
+		try {
+			new PersonaDao().modificar(p);
+		} catch (AppDaoException e) {
+			throw new AppServiceException(e);
+		}
+	}
+
+	public void eliminarPersona(Integer id) {
+		// TODO Validar si la persona existe en BD
+		try {
+			new PersonaDao().eliminar(id);
+		} catch (AppDaoException e) {
+			throw new AppServiceException(e);
+		}
+	}
 	
 }
