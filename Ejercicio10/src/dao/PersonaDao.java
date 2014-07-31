@@ -1,9 +1,8 @@
 package dao;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +19,8 @@ public class PersonaDao extends BaseDao {
 		String sql = "SELECT * FROM persona";
 
 		try {
-			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery(sql);
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				if (listaPersonas == null)
@@ -44,21 +43,19 @@ public class PersonaDao extends BaseDao {
 	}
 
 	public void agregar(Persona p) {
-		String fecha = new SimpleDateFormat("yyyy-MM-dd").format(p
-				.getFechaNacimiento());
-
 		String sql = "INSERT INTO persona(nombre, apellido, altura, fechaNacimiento) "
-				+ "VALUES('"
-				+ p.getNombre()
-				+ "', "
-				+ "'"
-				+ p.getApellido()
-				+ "'," + p.getAltura() + ", " + "'" + fecha + "')";
+				+ "VALUES(?, ?, ?, ?)";
 
-		Statement stmt;
+		
+		PreparedStatement pstmt = null;
 		try {
-			stmt = con.createStatement();
-			stmt.execute(sql);
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, p.getNombre());
+			pstmt.setString(2, p.getApellido());
+			pstmt.setFloat(3, p.getAltura());
+			pstmt.setDate(4, new java.sql.Date(
+					p.getFechaNacimiento().getTime()));
+			pstmt.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new AppDaoException(e);
@@ -67,11 +64,12 @@ public class PersonaDao extends BaseDao {
 
 	public Persona obtener(Integer id) {
 		Persona p = null;
-		String sql = "SELECT * FROM persona WHERE id = " + id;
+		String sql = "SELECT * FROM persona WHERE id = ?";
 
 		try {
-			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery(sql);
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, id);
+			ResultSet rs = pstmt.executeQuery();
 
 			if (rs.next()) {
 				p = new Persona(rs.getString("nombre"),
@@ -89,20 +87,20 @@ public class PersonaDao extends BaseDao {
 	}
 
 	public void modificar(Persona p) {
-		String fecha = new SimpleDateFormat("yyyy-MM-dd").format(p
-				.getFechaNacimiento());
-
 		String sql = "UPDATE persona SET " + 
-				"nombre = '" + p.getNombre() + "'" +  
-				", apellido = '" + p.getApellido() + "'" + 
-				", altura = " + p.getAltura() + 
-				", fechaNacimiento = '" + fecha + "'" +
-				" WHERE id = " + p.getId();
+				"nombre = ?, apellido = ?, altura = ?, " +  
+				"fechaNacimiento = ? WHERE id = ?";
 
-		Statement stmt;
+		PreparedStatement pstmt = null;
 		try {
-			stmt = con.createStatement();
-			stmt.execute(sql);
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, p.getNombre());
+			pstmt.setString(2, p.getApellido());
+			pstmt.setFloat(3, p.getAltura());
+			pstmt.setDate(4, new java.sql.Date(
+					p.getFechaNacimiento().getTime()));
+			pstmt.setInt(5, p.getId());
+			pstmt.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new AppDaoException(e);
@@ -110,11 +108,12 @@ public class PersonaDao extends BaseDao {
 	}
 
 	public void eliminar(Integer id) {
-		String sql = "DELETE FROM persona WHERE id = " + id;
+		String sql = "DELETE FROM persona WHERE id = ?";
 
 		try {
-			Statement stmt = con.createStatement();
-			stmt.executeUpdate(sql);
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, id);
+			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new AppDaoException(e);
