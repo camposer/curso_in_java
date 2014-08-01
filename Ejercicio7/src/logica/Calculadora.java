@@ -13,7 +13,7 @@ public abstract class Calculadora {
 		
 		validarOperadandos(a, b);
 		
-		long c = a + b;
+		long c = (long)a + (long)b;
 		if (c > Integer.MAX_VALUE)
 			throw new EnteroDesbordadoException();
 			
